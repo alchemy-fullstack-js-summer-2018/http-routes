@@ -30,6 +30,7 @@
     "nodemon": "^1.18.1"
   },
   "dependencies": {
+    "dotenv": "^6.0.0",
     "pg": "^7.4.3"
   }
 }
