@@ -11,7 +11,7 @@ describe('app level', () => {
 
     it('Returns a 404 if path not found', () => {
         return chai.request(app)
-            .get('/404')
+            .get('/not-found')
             .then(res => {
                 assert.equal(res.status, 404);
                 assert.equal(res.type, 'application/json');
