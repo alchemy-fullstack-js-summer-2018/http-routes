@@ -1,3 +1,4 @@
+/* eslint no-console: off */
 const { createServer } = require('http');
 const app = require('./lib/app');
 
