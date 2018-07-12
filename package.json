@@ -32,5 +32,9 @@
     "eslint": "^5.1.0",
     "mocha": "^5.2.0",
     "nodemon": "^1.18.1"
+  },
+  "dependencies": {
+    "dotenv": "^6.0.0",
+    "pg": "^7.4.3"
   }
 }

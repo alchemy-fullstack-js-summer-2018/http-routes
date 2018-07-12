@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>HTTP Routes</title>
+</head>
+<body>
+    <h1>Coffee</h1>
+    <ul id="coffee"></ul>
+    <script>
+        fetch('/coffee')
+            .then(response => response.json())
+            .then(coffee => {
+                const ul = document.getElementById('coffee');
+                coffee.forEach(coffee => {
+                    const li = document.createElement('li');
+                    li.innerText = `${coffee.name}`;
+                    ul.appendChild(li);
+                });
+            });
+    </script>
+</body>
+</html>

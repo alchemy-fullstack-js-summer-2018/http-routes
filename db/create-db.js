@@ -3,7 +3,7 @@
 const client = require('../lib/db-client');
 
 client.query(`
-    CREATE TABLE IF NOT EXISTS ultralight(
+    CREATE TABLE IF NOT EXISTS coffee(
         id SERIAL PRIMARY KEY,
         name VARCHAR(256) UNIQUE NOT NULL
     );
