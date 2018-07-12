@@ -2,3 +2,5 @@ language: node_js
 node_js: "10"
 Services:
   - postgresql
+script:
+  - npm run db:all
