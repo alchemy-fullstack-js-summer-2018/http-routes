@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Mushrooms</h1>
+    <ul id=mushrooms></ul>
+    <script>
+        fetch('/mushrooms')
+            .then(res => res.json())
+            .then(mushrooms => {
+                const ul = document.getElementById('mushrooms');
+                mushrooms.forEach(shroom => {
+                    const li = document.createElement('li');
+                    li.innerText = `${shroom.name} - ${shroom.description}.`;
+                    ul.appendChild(li);
+                });
+            });
+    </script>
+</body>
+</html>
