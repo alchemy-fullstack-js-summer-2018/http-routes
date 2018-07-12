@@ -5,7 +5,6 @@ const chaiHttp = require('chai-http');
 const { assert } = chai;
 chai.use(chaiHttp);
 const app = require('../lib/app');
-// const client = require('../lib/db-client');
 
 describe('app level', () => {
 
@@ -14,7 +13,7 @@ describe('app level', () => {
             .get('/not-found')
             .then(res => {
                 assert.equal(res.status, 404);
-                // assert.equal(res.type, 'application/json');
+                assert.equal(res.type, 'application/json');
             });
     });
 });
