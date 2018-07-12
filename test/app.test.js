@@ -48,3 +48,5 @@ describe('Archer API', () => {
             });
     });
 });
+    
+after(() => client.end());
