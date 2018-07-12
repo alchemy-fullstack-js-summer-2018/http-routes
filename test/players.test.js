@@ -46,6 +46,16 @@ describe('the basketball players API', () => {
         assert.ok(lebron.id);
     });
 
+    it('can PUT a player and update their information', () => {
+        lebron.position = 'any';
+        return chai.request(app)
+            .put('/players')
+            .send(lebron)
+            .then(({ body }) => {
+                assert.equal(body.position, 'any');
+            });
+    });
+
     it('can GET all players at once', () => {
         return chai.request(app)
             .get('/players')
