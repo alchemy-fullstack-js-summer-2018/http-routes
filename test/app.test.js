@@ -9,7 +9,7 @@ const client = require('../lib/db-client');
 
 describe('app level functionality', () => {
 
-    it('returns a 404 when the path is not found', () => {
+    it.skip('returns a 404 when the path is not found', () => {
         return chai.request(app)
             .get('/path-does-not-exist')
             .then(res => {
