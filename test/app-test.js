@@ -11,21 +11,12 @@ describe('app level', () => {
 
     it('returns 404 not found', () => {
         return chai.request(app)
-            .get('/shows')
+            .get('/not-found')
             .then(res => {
                 assert.equal(res.status, 404);
                 assert.equal(res.type, 'application/json');
             });
     });
-});
-
-describe('shows API', () => {
-    beforeEach(() => client.query('DELETE FROM shows'));
-
-    let alone = {
-        name: 'Alone',
-        description: 'Weirdos surviving for months alone in nature with an ax and a tarp.'
-    };
 });
 
 after(() => client.end());

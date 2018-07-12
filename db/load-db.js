@@ -10,7 +10,7 @@ const shows = [{
 },
 {
     name: 'Bachelorette',
-    description: '22 man-babies, 6 bores, and 2 semi-decent humans compete to marry a woman they barely know.'
+    description: '11 man-babies, 8 dummies, 7 bores, and 2 almost-decent humans compete to marry a woman they barely know.'
 }];
 
 const showPromises = shows.map(show => {
