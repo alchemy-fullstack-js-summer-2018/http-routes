@@ -127,8 +127,6 @@ describe('heroes API', () => {
                 assert.deepEqual(body, [rubick, slithice, disruptor, kunkka]);
             });
     });
-
-    
 });
 
 after(() => client.end());
