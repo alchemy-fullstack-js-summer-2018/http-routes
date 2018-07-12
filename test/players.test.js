@@ -26,8 +26,23 @@ describe('the basketball players API', () => {
             .get('/players')
             .then(({ body }) => {
                 // assert.equal()
-                console.log('***PLAYER CONSOLE***', body);
                 assert.deepEqual(body, [lebron, kd]);
+            });
+    });
+
+    it('can GET lebron when given an id', () => {
+        return chai.request(app)
+            .get('/players/1')
+            .then(({ body }) => {
+                assert.deepEqual(body, lebron);
+            });
+    });
+
+    it('can GET kd when given an id', () => {
+        return chai.request(app)
+            .get('/players/2')
+            .then(({ body }) => {
+                assert.deepEqual(body, kd);
             });
     });
 
