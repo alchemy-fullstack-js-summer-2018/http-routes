@@ -9,7 +9,7 @@ describe('disneyparks API', () => {
 
     it.skip('returns here you leave today on GET', () => {
         return chai.request(app)
-            .get('/disney-parks')
+            .get('/disneyparks')
             .then(res => {
                 assert.equal(res.status, 200);
                 assert.equal(res.text, 'Here you leave today...');
@@ -18,7 +18,7 @@ describe('disneyparks API', () => {
 
     it('returns you found a park', () => {
         return chai.request(app)
-            .get('/disney-parks')
+            .get('/disneyparks')
             .then(res => {
                 assert.equal(res.status, 200);
                 assert.deepEqual(res.body, [
