@@ -1,0 +1,57 @@
+[
+    {
+      "country": "United States",
+      "city": "San Francisco",
+      "food": "Oysters"
+    },
+    {
+      "country": "United States",
+      "city": "New York",
+      "food": "Reuben"
+    },
+    {
+      "country": "United States",
+      "city": "Boston",
+      "food": "Clam Chowder"
+    },
+    {
+      "country": "United States",
+      "city": "Miami",
+      "food": "Seafood"
+    },
+    {
+      "country": "Japan",
+      "city": "Tokyo",
+      "food": "Sushi"
+    },
+    {
+      "country": "Japan",
+      "city": "Osaka",
+      "food": "Okonomiyaki"
+    },
+    {
+      "country": "Japan",
+      "city": "Kyoto",
+      "food": "Yuba"
+    },
+    {
+      "country": "Japan",
+      "city": "Okinawa",
+      "food": "Okinawa Soba"
+    },
+    {
+      "country": "Thailand",
+      "city": "Bangkok",
+      "food": "Street Food"
+    },
+    {
+      "country": "Thailand",
+      "city": "Chiang Rai",
+      "food": "Northern Noodle Curry"
+    },
+    {
+      "country": "Laos",
+      "city": "Luang Prabang",
+      "food": "Khao Soi"
+    }
+  ]

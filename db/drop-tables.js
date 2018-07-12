@@ -1,4 +1,4 @@
-/* eslint no-console: off */
+/* eslint no-console: off, quotes: off */
 
 const client = require('../lib/db-client');
 

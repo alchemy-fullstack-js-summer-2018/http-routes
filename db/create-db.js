@@ -1,4 +1,4 @@
-/* eslint no-console: off */
+/* eslint no-console: off, quotes: off */
 
 const client = require('../lib/db-client');
 
@@ -7,7 +7,7 @@ client.query(`
         id SERIAL PRIMARY KEY,
         country VARCHAR(256),
         city VARCHAR(256),
-        language VARCHAR(256)
+        food VARCHAR(256)
     );
 `)
     .then(
