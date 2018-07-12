@@ -1,6 +1,6 @@
 /* eslint no-console: off, quotes: off */
 
-const client = require('..lib/db-client');
+const client = require('../lib/db-client');
 
 const titles = ['Synchronicity', 'Disintegration', 'Violator', 'So', 'Ghost in the Machine'];
 
