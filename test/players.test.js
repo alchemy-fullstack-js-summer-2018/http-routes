@@ -9,13 +9,7 @@ describe('the basketball players API', () => {
 
     beforeEach(() => client.query('DELETE FROM players;'));
 
-    let lebron = {
-        name: 'LeBron James',
-        id: 1,
-        position: 'SF',
-        description: 'Best player on the planet'
-    };
-
+    
     function save(player) {
         return chai.request(app)
             .post('/players')
@@ -25,6 +19,13 @@ describe('the basketball players API', () => {
                 assert.deepEqual(body, player);
             });
     }
+    
+    let lebron = {
+        name: 'LeBron James',
+        id: 1,
+        position: 'SF',
+        description: 'Best player on the planet'
+    };
         
     let kd = {
         name: 'Kevin Durant',
@@ -49,14 +50,13 @@ describe('the basketball players API', () => {
         return chai.request(app)
             .get('/players')
             .then(({ body }) => {
-                // assert.equal()
                 assert.deepEqual(body, [lebron, kd]);
             });
     });
 
     it('can GET lebron when given his id', () => {
         return chai.request(app)
-            .get('/players/1')
+            .get(`/players/${lebron.id}`)
             .then(({ body }) => {
                 assert.deepEqual(body, lebron);
             });
@@ -64,7 +64,7 @@ describe('the basketball players API', () => {
 
     it('can GET kd when given his id', () => {
         return chai.request(app)
-            .get('/players/2')
+            .get(`/players/${kd.id}`)
             .then(({ body }) => {
                 assert.deepEqual(body, kd);
             });
