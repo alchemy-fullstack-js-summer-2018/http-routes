@@ -6,6 +6,7 @@ const { assert } = chai;
 chai.use(chaiHttp);
 const app = require('../lib/app');
 const client = require('../lib/db-client');
+const myDB = chai.request(app);
 
 describe('app level', () => {
 
@@ -40,6 +41,39 @@ describe('heroes API', () => {
         attribute: 'Strength'
     };
 
+    function save(hero) {
+        return chai.request(app)
+            .post('/heroes')
+            .send(hero)
+            .then(({ body }) => {
+                hero.id = body.id;
+                assert.deepEqual(body, hero);
+            });
+    }
+
+    beforeEach(() => {
+        return save(rubick);
+    });
+    beforeEach(() => {
+        return save(slithice);
+    });
+    beforeEach(() => {
+        return save(kunkka);
+    });
+
+    it('can POST heroes', () => {
+        assert.ok(rubick.id);
+        assert.ok(slithice.id);
+        assert.ok(kunkka.id);
+    });
+
+    it('can GET all heroes', () => {
+        return chai.request(app)
+            .get('/heroes')
+            .then(({ body }) => {
+                assert.deepEqual(body, [rubick, slithice, kunkka]);
+            });
+    });
 });
 
 after(() => client.end());
