@@ -46,6 +46,21 @@ describe('the basketball players API', () => {
         assert.ok(lebron.id);
     });
 
+    it('can DELETE a player from the db', () => {
+        return chai.request(app)
+            .del(`/players/${kd.id}`)
+            .then(res => {
+                assert.deepEqual(res.body, { removed: true });
+            })
+            .then(() => {
+                return chai.request(app)
+                    .get(`/pets/${kd.id}`);
+            })
+            .then(res => {
+                assert.equal(res.status, 404);
+            });
+    });
+
     it('can PUT a player and update their information', () => {
         lebron.position = 'any';
         return chai.request(app)
