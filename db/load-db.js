@@ -14,8 +14,6 @@ const archer = [
     }
 ];
 
-console.log(archer);
-
 const archerTable = archer.map(character => {
     return client.query(`
         INSERT INTO archer (
@@ -46,7 +44,6 @@ Promise.all(archerTable)
     })
     .then(
         () => console.log('load successful'),
-        //console.log('RIGHT BEFORE ERROR!'),
         err => console.error(err)
     )
     .then(() => {
