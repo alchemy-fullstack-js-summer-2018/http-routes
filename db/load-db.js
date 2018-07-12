@@ -27,7 +27,7 @@ const playerPromises = players.map(player => {
 Promise.all(playerPromises)
     .then(() => {
         return client.query(
-            `SELECT * FROM players`
+            'SELECT * FROM players;'
         );
     })
     .then(result => {
