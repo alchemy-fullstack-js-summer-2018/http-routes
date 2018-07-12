@@ -2,14 +2,35 @@
 
 const client = require('../lib/db-client');
 
-const disneyparks = ['DLR', 'WDW', 'TDR', 'DLP'];
+const disneyparks = [
+    {
+        name: 'DLR',
+        location: 'Anaheim',
+        est: 1955
+    },
+    {
+        name: 'WDW',
+        location: 'Orlando',
+        est: 1971
+    },
+    {
+        name: 'TDR',
+        location: 'Tokyo',
+        est: 1983
+    },
+    {
+        name: 'DLP',
+        location: 'Paris',
+        est: 1992
+    }
+];
 
 const parkPromises = disneyparks.map(park => {
     return client.query(
-        `INSERT INTO disneyparks(name)
-        VALUES($1)
+        `INSERT INTO disneyparks(name, location, est)
+        VALUES($1, $2, $3)
         ON CONFLICT DO NOTHING;`,
-        [park]
+        [park.name, park.location, park.est]
     );
 });
 
