@@ -43,4 +43,12 @@ describe('Locations API', () => {
         assert.ok(tokyo.id);
     });
 
+    it('GET locations', () => {
+        return chai.request(app)
+            .get('/locations')
+            .then(({ body }) => {
+                assert.equal(body, [tokyo, miami]);
+            });
+    });
+
 });
