@@ -1,20 +1,32 @@
 const client = require('../lib/db-client');
 
-const positions = ['pg', 'sg', 'sf', 'pf', 'c'];
+// const players = ['1', 'LeBron', 'SF', 'Best player on the planet'];
+const players = [{
+    id: '1',
+    name: 'Lebron',
+    position: 'SF',
+    description: 'Best player on the planet'
+},
+{
+    id: '2',
+    name: 'Kevin Durant',
+    position: 'SF/PF',
+    description: 'People do not like KD cause he snekked'
+}];
 
-const positionPromises = positions.map(position => {
+const playerPromises = players.map(player => {
     return client.query(
-        `INSERT INTO positions(position)
-        VALUES($1)
+        `INSERT INTO players
+        VALUES($1, $2, $3, $4)
         ON CONFLICT DO NOTHING;`,
-        [position]
+        [player.id, player.name, player.position, player.description]
     );
 });
 
-Promise.all(positionPromises)
+Promise.all(playerPromises)
     .then(() => {
         return client.query(
-            `SELECT * FROM positions`
+            `SELECT * FROM players`
         );
     })
     .then(result => {

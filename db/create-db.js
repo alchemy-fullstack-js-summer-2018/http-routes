@@ -1,15 +1,10 @@
 const client = require('../lib/db-client');
 
 client.query(`
-    CREATE TABLE IF NOT EXISTS positions(
-        id SERIAL PRIMARY KEY,
-        position VARCHAR(256) UNIQUE NOT NULL
-    );
-
     CREATE TABLE IF NOT EXISTS players(
         id SERIAL PRIMARY KEY,
         name VARCHAR(256),
-        position_id INTEGER NOT NULL REFERENCES positions (id),
+        position VARCHAR(256),
         description VARCHAR(256)
     );
 `)
