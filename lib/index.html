@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Them Shows</h1>
+    <ul id="shows"></ul>
+    <script>
+        fetch('/shows')
+            .then(response => response.json())
+            .then(shows => {
+                const ul = document.getElementById('shows');
+                shows.forEach(show => {
+                    const li = document.createElement('li');
+                    li.innerText = `${show.name} ${show.description}`;
+                    ul.appendChild(li);
+                })
+            })
+    </script>
+    
+</body>
+</html>
