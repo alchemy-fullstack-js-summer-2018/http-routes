@@ -69,4 +69,16 @@ describe('Locations API', () => {
             });
     });
 
+    it('Deletes a location', () => {
+        return chai.request(app)
+            .del(`/pets/${tokyo.id}`)
+            .then(() => {
+                return chai.request(app)
+                    .get(`/pets/${tokyo.id}`);
+            })
+            .then(res => {
+                assert.equal(res.status, 404);
+            });
+    });
+
 });
