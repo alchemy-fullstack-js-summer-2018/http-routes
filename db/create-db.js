@@ -10,7 +10,7 @@ client.query(`
     );
 `)
     .then(
-        () => console.log('db workin'),
+        () => console.log('create db table workin'),
         err => console.error(err)
     )
     .then(() => client.end());
