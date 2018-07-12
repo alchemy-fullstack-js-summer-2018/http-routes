@@ -7,7 +7,49 @@ const client = require('../lib/db-client');
 
 describe('disneyparks API', () => {
 
-    it.skip('returns list of parks(GET /disneyparks)', () => {
+    beforeEach(() => client.query('DELETE FROM disneyparks'));
+
+    let dlr = {
+        name: 'DLR',
+        location: 'Anaheim',
+        est: 1955
+    };
+
+    // {
+    //     name: 'WDW',
+    //     location: 'Orlando',
+    //     est: 1971
+    // },
+    // {
+    //     name: 'TDR',
+    //     location: 'Tokyo',
+    //     est: 1983
+    // },
+    // {
+    //     name: 'DLP',
+    //     location: 'Paris',
+    //     est: 1992
+    // }
+
+    function save(park) {
+        return chai.request(app)
+            .post('/disneyparks')
+            .send(park)
+            .then(({ body }) => {
+                park.id = body.id;
+                assert.deepEqual(body, park);
+            });
+    }
+
+    beforeEach(() => {
+        return save(dlr);
+    });
+
+    it('saves a park', () => {
+        assert.ok(dlr.id);
+    });
+    
+    it('returns list of parks(GET /disneyparks)', () => {
         return chai.request(app)
             .get('/disneyparks')
             .then(res => {
