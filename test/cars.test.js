@@ -51,7 +51,7 @@ describe('Cars API', () => {
         assert.ok(nissan.id);
     });
 
-    it.skip('Updates a car', () => {
+    it('Updates a car', () => {
         nissan.model = 'sentra';
         return chai.request(app)
             .put(`/cars/${nissan.id}`)
