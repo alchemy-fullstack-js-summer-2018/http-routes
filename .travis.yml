@@ -3,5 +3,6 @@ node_js:
   - "10"
 services:
   - postgresql
-script: 
+before_script: 
+  - psql -c 'create database yourDbName;' -U postgres
   - npm run db:all
