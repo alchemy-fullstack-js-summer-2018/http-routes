@@ -51,4 +51,12 @@ describe('Locations API', () => {
             });
     });
 
+    it('GET location by id', () => {
+        return chai.request(app)
+            .get(`/locations/${tokyo.id}`)
+            .then(({ body }) => {
+                assert.deepEqual(body, tokyo);
+            });
+    });
+
 });
