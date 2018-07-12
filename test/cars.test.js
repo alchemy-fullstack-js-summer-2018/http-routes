@@ -2,24 +2,24 @@ const chai = require('chai');
 const chaitHttp = require('chai-http');
 const { assert } = chai;
 chai.use(chaitHttp);
-const app = require('../lib/db-client');
+const app = require('../lib/app');
 const client = require('../lib/db-client');
 
 describe('Cars API', () => {
 
     beforeEach(() => client.query('DELETE FROM cars'));
 
-    let skyline = {
+    let nissan = {
         brand: 'nissan',
         model: 'skyline'
     };
 
-    let impreza = {
+    let subaru = {
         brand: 'subaru',
         model: 'impreza'
     };
 
-    let lancer = {
+    let mistubishi = {
         brand: 'mistubishi',
         model: 'lancer'
     };
@@ -30,23 +30,36 @@ describe('Cars API', () => {
             .send(car)
             .then(({ body }) => {
                 car.id = body.id;
+                console.log(body.id);
                 assert.deepEqual(body, car);
+                console.log(body);
+                
             });
     }
 
     beforeEach(() => {
-        return save(skyline);
+        return save(nissan);
     });
 
     beforeEach(() => {
-        return save(impreza);
+        return save(subaru);
     });
 
     beforeEach(() => {
-        return save(lancer);
+        return save(mistubishi);
     });
 
     it('Saves a car', () => {
-        assert.ok(skyline.id);
+        assert.ok(nissan.id);
+    });
+
+    it('Updates a car', () => {
+        nissan.model = 'sentra';
+        return chai.request(app)
+            .put(`/cars/${nissan.id}`)
+            .send(nissan)
+            .then(({ body }) => {
+                assert.equal(body.model, 'sentra');
+            });
     });
 }); 
