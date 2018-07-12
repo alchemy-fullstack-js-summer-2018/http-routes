@@ -47,6 +47,10 @@ describe('movies API', () => {
         return save(coraline);
     });
 
+    it('saves a movie', () => {
+        assert.ok(terminator.id);
+    });
+
     it('GET movie by id', () => {
         return chai.request(app)
             .get(`/movies/${terminator.id}`)
@@ -63,12 +67,22 @@ describe('movies API', () => {
             });
     });
 
+    it('updates a movie', () => {
+        collateral.genre = 'thriller';
+        return chai.request(app)
+            .put(`/movies/${collateral.id}`)
+            .send(collateral)
+            .then(({ body }) => {
+                assert.equal(body.genre, 'thriller');
+            });
+    });
+
     it('DELETE movie', () => {
         return chai.request(app)
-            .del('/movies/1')
+            .del(`/movies/${terminator.id}`)
             .then(() => {
                 return chai.request(app)
-                    .get('/movies/1');
+                    .get(`/movies/${terminator.id}`);
             })
             .then(res => {
                 assert.equal(res.status, 404);
