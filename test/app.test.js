@@ -8,7 +8,7 @@ chai.use(chaiHttp);
 const app = require('../lib/app');
 const client = require('../lib/db-client');
 
-describe.only('app level', () => {
+describe('app level', () => {
 
     it('returns 404 on not found', () => {
         return chai.request(app)

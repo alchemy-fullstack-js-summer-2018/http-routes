@@ -7,18 +7,18 @@ const client = require('../lib/db-client');
 
 describe('fruits API', () => {
 
-    beforeEach(() => client.query('DELETE FROM pets'));
+    beforeEach(() => client.query('DELETE FROM fruits'));
 
     let fruit1 = {
         name: 'Strawberries',
         color: 'red',
-        calories: '125'
+        calories: 125
     };
 
     let fruit2  = {
         name: 'Watermelon',
         color: 'yellow',
-        calories: '75'
+        calories: 75
     };
 
     function save(fruit) {
