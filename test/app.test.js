@@ -17,4 +17,12 @@ describe('app level', () => {
                 // assert.equal(res.type, 'application/json');
             });
     });
+
+    it('returns disneyparks page on GET', () => {
+        return chai.request(app)
+            .get('/disney-parks')
+            .then(res => {
+                assert.equal(res.text, 'Here you you leave today...')
+            });
+    });
 });
