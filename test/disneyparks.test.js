@@ -7,20 +7,21 @@ const client = require('../lib/db-client');
 
 describe('disneyparks API', () => {
 
-    it.skip('returns here you leave today on GET', () => {
+    it('returns list of parks(GET /disneyparks)', () => {
         return chai.request(app)
             .get('/disneyparks')
             .then(res => {
                 assert.equal(res.status, 200);
-                assert.equal(res.text, 'Here you leave today...');
+                assert.deepEqual(res.body, [
+                    { name: 'DLR' }
+                ]);
             });
     });
 
-    it('returns you found a park', () => {
+    it('GET park by id', () => {
         return chai.request(app)
             .get('/disneyparks')
             .then(res => {
-                assert.equal(res.status, 200);
                 assert.deepEqual(res.body, [
                     { name: 'DLR' }
                 ]);
