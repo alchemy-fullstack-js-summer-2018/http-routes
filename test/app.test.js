@@ -16,11 +16,11 @@ describe('Archer API', () => {
         quote: 'Phrasing.'
     };
 
-    let lana = {
-        name: 'Lana Kane',
-        sex: 'male',
-        quote: 'Yup.'
-    };
+    // let lana = {
+    //     name: 'Lana Kane',
+    //     sex: 'male',
+    //     quote: 'Yup.'
+    // };
 
     function save(character) {
         return chai.request(app)
