@@ -22,7 +22,7 @@ describe('app level', () => {
         return chai.request(app)
             .get('/disney-parks')
             .then(res => {
-                assert.equal(res.text, 'Here you you leave today...')
+                assert.equal(res.text, 'Here you leave today...')
             });
     });
 });
