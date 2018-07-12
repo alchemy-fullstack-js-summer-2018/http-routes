@@ -2,21 +2,21 @@
 
 const client = require('../lib/db-client');
 
-const categories = ['single coil pickups', 'humbucker pickups'];
+const guitars = ['Fender', 'Gibson'];
 
-const categoryPromises = categories.map(category => {
+const categoryPromises = guitars.map(guitar => {
     return client.query(
-        `INSERT INTO categories(model)
+        `INSERT INTO guitars(model)
         VALUES($1)
         ON CONFLICT DO NOTHING;`,
-        [category]
+        [guitar]
     );
 });
 
 Promise.all(categoryPromises)
     .then(() => {
         return client.query(
-            `SELECT * FROM categories`
+            `SELECT * FROM guitars`
         );
     })
     .then(

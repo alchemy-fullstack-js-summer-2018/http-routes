@@ -4,7 +4,7 @@ const client = require('../lib/db-client');
 
 client.query(`
     DROP TABLE guitars;
-    DROP TABLE categories;
+    
 `)
     .then(
         () => console.log('drop successful'),

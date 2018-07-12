@@ -5,7 +5,8 @@ const client = require('../lib/db-client');
 client.query(`
     CREATE TABLE IF NOT EXISTS guitars(
         id SERIAL PRIMARY KEY,
-        name VARCHAR(256) UNIQUE NOT NULL
+        model VARCHAR(256) UNIQUE NOT NULL,
+        manufacturer VARCHAR(256) UNIQUE NOT NULL
     );
 `)
     .then(
