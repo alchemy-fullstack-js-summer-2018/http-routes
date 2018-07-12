@@ -91,6 +91,42 @@ describe('heroes API', () => {
                 assert.deepEqual(body, slithice);
             });
     });
+
+    it.skip('can GET heroes by attribute', () => {
+        return chai.request(app)
+            .get('/heroes/intelligence')
+            .then(({ body }) => {
+                assert.deepEqual(body, [rubick, disruptor]);
+            });
+    });
+
+    it('can UPDATE a hero', () => {
+        kunkka.title = 'Rival of Tidehunter';
+        return chai.request(app)
+            .put(`/heroes/${kunkka.id}`)
+            .send(kunkka)
+            .then(({ body }) => {
+                assert.equal(body.title, kunkka.title);
+            })
+            .then(() => chai.request(app).get('/heroes'))
+            .then(({ body }) => {
+                assert.deepEqual(body, [rubick, slithice, disruptor, kunkka]);
+            });
+    });
+
+    it('can DELETE a hero', () => {
+        return chai.request(app)
+            .del(`/heroes/${disruptor.id}`)
+            .then(res => {
+                assert.equal(res.status, 200);
+            })
+            .then(() => {
+                return chai.request(app).get(`/heroes/${disruptor.id}`);
+            })
+            .then(res => {
+                assert.equal(res.status, 404);
+            });
+    });
 });
 
 after(() => client.end());
