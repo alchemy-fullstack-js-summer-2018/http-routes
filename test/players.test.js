@@ -9,12 +9,14 @@ describe('the basketball players API', () => {
 
     let lebron = {
         name: 'LeBron James',
+        id: 1,
         position: 'SF',
         description: 'Best player on the planet'
     };
 
     let kd = {
         name: 'Kevin Durant',
+        id: 2,
         position: 'SF/PF',
         description: 'People do not like KD cause he snekked'
     };
