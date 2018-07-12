@@ -76,6 +76,20 @@ describe('heroes API', () => {
         assert.ok(disruptor.id);
     });
 
+    it('can DELETE a hero', () => {
+        return chai.request(app)
+            .del(`/heroes/${disruptor.id}`)
+            .then(res => {
+                assert.equal(res.status, 200);
+            })
+            .then(() => {
+                return chai.request(app).get(`/heroes/${disruptor.id}`);
+            })
+            .then(res => {
+                assert.equal(res.status, 404);
+            });
+    });
+
     it('can GET all heroes', () => {
         return chai.request(app)
             .get('/heroes')
@@ -92,9 +106,9 @@ describe('heroes API', () => {
             });
     });
 
-    it.skip('can GET heroes by attribute', () => {
+    it('can GET heroes by attribute', () => {
         return chai.request(app)
-            .get('/heroes/intelligence')
+            .get('/heroes?attribute=Intelligence')
             .then(({ body }) => {
                 assert.deepEqual(body, [rubick, disruptor]);
             });
@@ -114,19 +128,7 @@ describe('heroes API', () => {
             });
     });
 
-    it('can DELETE a hero', () => {
-        return chai.request(app)
-            .del(`/heroes/${disruptor.id}`)
-            .then(res => {
-                assert.equal(res.status, 200);
-            })
-            .then(() => {
-                return chai.request(app).get(`/heroes/${disruptor.id}`);
-            })
-            .then(res => {
-                assert.equal(res.status, 404);
-            });
-    });
+    
 });
 
 after(() => client.end());
