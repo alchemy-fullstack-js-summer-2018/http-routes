@@ -7,6 +7,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
-    <h1>Travel: Cities</h1>
+    <h1>Travel: Destinations</h1>
+    <ul id="locations"></ul>
+    <script>
+        fetch('/locations')
+            .then(response => response.json())
+            .then(locations => {
+                const ul = document.getElementById('locations');
+                locations.forEach(location => {
+                    const li = document.createElement('li');
+                    li.innerText = `${location.city}, ${location.country}. Food: ${location.food}`;
+                    ul.appendChild(li);
+                });
+            });  
+    </script>
 </body>
 </html>
