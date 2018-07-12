@@ -5,7 +5,7 @@ const chaiHttp = require('chai-http');
 const { assert } = chai;
 chai.use(chaiHttp);
 const app = require('../lib/app');
-// const client = require('../lib/db-client');
+const client = require('../lib/db-client');
 
 describe('app level', () => {
 
@@ -15,14 +15,6 @@ describe('app level', () => {
             .then(res => {
                 assert.equal(res.status, 404);
                 // assert.equal(res.type, 'application/json');
-            });
-    });
-
-    it('returns disneyparks page on GET', () => {
-        return chai.request(app)
-            .get('/disney-parks')
-            .then(res => {
-                assert.equal(res.text, 'Here you leave today...')
             });
     });
 });
