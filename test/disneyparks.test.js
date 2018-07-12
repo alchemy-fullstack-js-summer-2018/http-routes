@@ -61,9 +61,9 @@ describe('disneyparks API', () => {
             });
     });
 
-    it.skip('GET park by id', () => {
+    it('GET park by id', () => {
         return chai.request(app)
-            .get('/disneyparks/1')
+            .get(`/disneyparks/${dlr.id}`)
             .then(res => {
                 assert.deepEqual(res.body.name, 'DLR');
             });
