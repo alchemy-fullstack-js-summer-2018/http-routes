@@ -15,21 +15,23 @@ describe('disneyparks API', () => {
         est: 1955
     };
 
-    // {
+    // let wdw = {
     //     name: 'WDW',
     //     location: 'Orlando',
     //     est: 1971
-    // },
-    // {
+    // };
+
+    // let tdr = {
     //     name: 'TDR',
     //     location: 'Tokyo',
     //     est: 1983
-    // },
-    // {
+    // };
+
+    // let dlp = {
     //     name: 'DLP',
     //     location: 'Paris',
     //     est: 1992
-    // }
+    // };
 
     function save(park) {
         return chai.request(app)
@@ -37,6 +39,7 @@ describe('disneyparks API', () => {
             .send(park)
             .then(({ body }) => {
                 park.id = body.id;
+                console.log('body', body);
                 assert.deepEqual(body, park);
             });
     }
@@ -49,7 +52,7 @@ describe('disneyparks API', () => {
         assert.ok(dlr.id);
     });
     
-    it('returns list of parks(GET /disneyparks)', () => {
+    it.skip('returns list of parks(GET /disneyparks)', () => {
         return chai.request(app)
             .get('/disneyparks')
             .then(res => {
@@ -58,7 +61,7 @@ describe('disneyparks API', () => {
             });
     });
 
-    it('GET park by id', () => {
+    it.skip('GET park by id', () => {
         return chai.request(app)
             .get('/disneyparks/1')
             .then(res => {
