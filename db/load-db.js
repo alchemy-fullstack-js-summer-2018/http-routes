@@ -1,7 +1,7 @@
 const client = require('../lib/db-client');
 
 const players = [{
-    name: 'Lebron',
+    name: 'LeBron James',
     position: 'SF',
     description: 'Best player on the planet'
 },

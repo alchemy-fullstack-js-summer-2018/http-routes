@@ -13,8 +13,8 @@ describe('app level functionality', () => {
         return chai.request(app)
             .get('/path-does-not-exist')
             .then(res => {
-                // console.log('***TEST CONSOLE***', res);
                 assert.equal(res.status, 404);
+                assert.equal(res.type, 'application/json');
             });
     });
 });
