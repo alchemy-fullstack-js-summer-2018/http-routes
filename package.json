@@ -1,0 +1,26 @@
+{
+  "name": "http-routes",
+  "version": "1.0.0",
+  "description": "## An Alchemy Code Lab assignment by Carrie Carter Create an HTTP server that exposes a REST API for a resource",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/carriecarter/http-routes.git"
+  },
+  "author": "Carrie Carter",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/carriecarter/http-routes/issues"
+  },
+  "homepage": "https://github.com/carriecarter/http-routes#readme",
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "chai-http": "^4.0.0",
+    "eslint": "^5.1.0",
+    "mocha": "^5.2.0",
+    "nodemon": "^1.18.1"
+  }
+}
