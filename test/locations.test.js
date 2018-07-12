@@ -59,4 +59,14 @@ describe('Locations API', () => {
             });
     });
 
+    it('Updates a location', () => {
+        tokyo.food = 'Yakitori';
+        return chai.request(app)
+            .put(`/locations/${tokyo.id}`)
+            .send(tokyo)
+            .then(({ body }) => {
+                assert.equal(body.food, 'Yakitori');
+            });
+    });
+
 });
