@@ -30,9 +30,8 @@ describe('Cars API', () => {
             .send(car)
             .then(({ body }) => {
                 car.id = body.id;
-                console.log(body.id);
-                assert.deepEqual(body, car);
                 console.log(body);
+                assert.deepEqual(body, car);
                 
             });
     }
