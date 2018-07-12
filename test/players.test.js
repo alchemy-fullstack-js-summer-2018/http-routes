@@ -3,11 +3,9 @@ const chaiHttp = require('chai-http');
 const { assert } = chai;
 chai.use(chaiHttp);
 const app = require('../lib/app');
-const client = require('../lib/db-client');
+// const client = require('../lib/db-client');
 
 describe('the basketball players API', () => {
-
-    beforeEach(() => client.query('DELETE FROM players;'));
 
     let lebron = {
         name: 'LeBron James',
@@ -21,25 +19,38 @@ describe('the basketball players API', () => {
         description: 'People do not like KD cause he snekked'
     };
 
-    function save(player) {
+    it('can GET all players at once', () => {
         return chai.request(app)
-            .post('/players')
-            .send(player)
+            .get('/players')
             .then(({ body }) => {
-                player.id = body.id;
-                assert.deepEqual(body, player);
+                // assert.equal()
+                console.log('***PLAYER CONSOLE***', body);
+                assert.deepEqual(body, [lebron, kd]);
             });
-    }
-
-    beforeEach(() => {
-        return save(lebron);
     });
 
-    beforeEach(() => {
-        return save(kd);
-    });
+    // beforeEach(() => client.query('DELETE FROM players;'));
 
-    it('saves a player', () => {
-        assert.ok(lebron.id);
-    });
+
+    // function save(player) {
+    //     return chai.request(app)
+    //         .post('/players')
+    //         .send(player)
+    //         .then(({ body }) => {
+    //             player.id = body.id;
+    //             assert.deepEqual(body, player);
+    //         });
+    // }
+
+    // beforeEach(() => {
+    //     return save(lebron);
+    // });
+
+    // beforeEach(() => {
+    //     return save(kd);
+    // });
+
+    // it('saves a player', () => {
+    //     assert.ok(lebron.id);
+    // });
 });
