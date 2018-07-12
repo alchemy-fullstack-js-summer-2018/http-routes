@@ -47,7 +47,7 @@ describe('Locations API', () => {
         return chai.request(app)
             .get('/locations')
             .then(({ body }) => {
-                assert.equal(body, [tokyo, miami]);
+                assert.deepEqual(body, [tokyo, miami]);
             });
     });
 
