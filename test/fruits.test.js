@@ -42,4 +42,13 @@ describe('fruits API', () => {
     it('saves a fruit', () => {
         assert.ok(fruit2.id);
     });
+    it('updates a fruit', () => {
+        fruit2.color = 'red';
+        return chai.request(app)
+            .put(`/fruits/${fruit2.id}`)
+            .send(fruit2)
+            .then(({ body }) => {
+                assert.equal(body.color, 'red');
+            });
+    });
 });
