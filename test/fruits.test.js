@@ -51,4 +51,18 @@ describe('fruits API', () => {
                 assert.equal(body.color, 'red');
             });
     });
+    it('GET fruit by id', () => {
+        return chai.request(app)
+            .get(`/fruits/${fruit2.id}`)
+            .then(({ body }) => {
+                assert.deepEqual(body, fruit2);
+            });
+    });
+    it('GET fruits', () => {
+        return chai.request(app)
+            .get('/fruits')
+            .then(({ body }) => {
+                assert.deepEqual(body, [fruit1, fruit2]);
+            });
+    });
 });
