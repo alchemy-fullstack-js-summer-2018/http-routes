@@ -52,4 +52,35 @@ describe('mushrooms API', () => {
                 assert.deepEqual(body, shiitake);
             });
     });
+
+    it('Gets all the shrooms', () => {
+        return chai.request(app)
+            .get('/mushrooms')
+            .then(({ body }) => {
+                assert.deepEqual(body, [shiitake, amanita]);
+            });
+    });
+
+    it('Updates a shroom', () => {
+        amanita.origin = 'The Mushroom Kingdom';
+        return chai.request(app)
+            .put('/mushrooms')
+            .send(amanita)
+            .then(({ body }) => {
+                assert.equal(body.origin, 'The Mushroom Kingdom');
+            });
+    });
+
+    it('Deletes a shroom', () => {
+        return chai.request(app)
+            .delete(`/mushrooms/${shiitake.id}`)
+            .then(() => {
+                return chai.request(app)
+                    .get(`/mushrooms/${shiitake.id}`);
+            })
+            .then(res => {
+                assert.equal(res.status, 404);
+            });
+                
+    });
 });
