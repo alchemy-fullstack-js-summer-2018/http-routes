@@ -65,4 +65,16 @@ describe('fruits API', () => {
                 assert.deepEqual(body, [fruit1, fruit2]);
             });
     });
+    it('DELETE fruit', () => {
+        return chai.request(app)
+            .del(`/fruits/${fruit2.id}`)
+            .then(() => {
+                return chai.request(app)
+                    .get(`/fruits/${fruit2.id}`);
+            })
+            .then(res => {
+                assert.equal(res.status, 404);
+            });
+    });
+
 });
