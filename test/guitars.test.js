@@ -1,3 +1,6 @@
+const { join } = require('path');
+require('dotenv').config({ path: join(__dirname, '.env') });
+
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const { assert } = chai;
@@ -34,4 +37,14 @@ describe('guitars API', () => {
         assert.ok(Stratocaster.id);
     });
      
+    it('updates a guitar', () => {
+        Stratocaster.manufacturer = 'Squire';
+        return chai.request(app)
+            .put(`/guitars/${Stratocaster.id}`)
+            .send(Stratocaster)
+            .then(({ body }) => {
+                assert.equal(body.manufacturer, Stratocaster.manufacturer);
+          
+            });
+    });
 });
