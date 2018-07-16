@@ -53,4 +53,12 @@ describe('guitars API', () => {
                 assert.deepEqual(body, [Stratocaster]);
             });
     });
+    //Get guitar by ID
+    it('gets a guitar by id', () => {
+        return chai.request(app)
+            .get(`/guitars/${Stratocaster.id}`)
+            .then(({ body }) => {
+                assert.deepEqual(body, Stratocaster);
+            });
+    });
 });
