@@ -69,7 +69,6 @@ describe('Cars API', () => {
             .then(() => chai.request(app).get('/cars'))
             .then(({ body }) => {
                 body.sort((a, b) => a.id - b.id);
-                console.log(body);
                 assert.deepEqual(body, [nissan, subaru, mistubishi]);
             });
     });
