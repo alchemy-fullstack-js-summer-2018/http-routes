@@ -16,7 +16,6 @@ describe('guitars API', () => {
         model: 'Stratocaster',
         manufacturer: 'Fender' 
     };
-    //Saves a guitar
     function save(guitar) {
         return chai.request(app)
             .post('/guitars')
@@ -34,7 +33,6 @@ describe('guitars API', () => {
     it('saves a guitar', () => {
         assert.ok(Stratocaster.id);
     });
-    //Updates a guitar 
     it('updates a guitar', () => {
         Stratocaster.manufacturer = 'Squire';
         return chai.request(app)
@@ -45,7 +43,6 @@ describe('guitars API', () => {
           
             });
     });
-    //Gets sll guitars
     it('gets all guitars', () => {
         return chai.request(app)
             .get('/guitars')
@@ -53,7 +50,7 @@ describe('guitars API', () => {
                 assert.deepEqual(body, [Stratocaster]);
             });
     });
-    //Get guitar by ID
+    
     it('gets a guitar by id', () => {
         return chai.request(app)
             .get(`/guitars/${Stratocaster.id}`)
@@ -61,4 +58,19 @@ describe('guitars API', () => {
                 assert.deepEqual(body, Stratocaster);
             });
     });
+    
+    it('deletes a guitar', () => {
+        return chai.request(app)
+            .del(`/guitars/${Stratocaster.id}`)
+            .then(res => {
+                assert.equal(res.status, 200);
+            })
+            .then(() => {
+                return chai.request(app).get(`/guitars/${Stratocaster.id}`);
+            })
+            .then(res => {
+                assert.equal(res.status, 404);
+            });
+    });
 });
+

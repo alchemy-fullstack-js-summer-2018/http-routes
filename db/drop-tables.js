@@ -10,6 +10,5 @@ client.query(`
         () => console.log('drop successful'),
         err => console.error(err)
     )
-    .then(() => {
-        client.end();
-    });
+    .then(() => client.end());
+    
