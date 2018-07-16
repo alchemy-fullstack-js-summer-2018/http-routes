@@ -61,6 +61,19 @@ describe('Cars API', () => {
             });
     });
 
+    it('Updates only car being updated', () => {
+        subaru.model = 'legacy';
+        return chai.request(app)
+            .put(`/cars/${subaru.id}`)
+            .send(subaru)
+            .then(() => chai.request(app).get('/cars'))
+            .then(({ body }) => {
+                body.sort((a, b) => a.id - b.id);
+                console.log(body);
+                assert.deepEqual(body, [nissan, subaru, mistubishi]);
+            });
+    });
+
     it('Get car by id', () => {
         return chai.request(app)
             .get(`/cars/${nissan.id}`)
