@@ -60,4 +60,12 @@ describe('Cars API', () => {
                 assert.equal(body.model, 'sentra');
             });
     });
+
+    it('Get car by id', () => {
+        return chai.request(app)
+            .get(`/cars/${nissan.id}`)
+            .then(({ body })  => {
+                assert.deepEqual(body, nissan);
+            });
+    }); 
 }); 
