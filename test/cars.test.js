@@ -73,8 +73,19 @@ describe('Cars API', () => {
         return chai.request(app)
             .get('/cars')
             .then(({ body }) => {
-                console.log(body);
                 assert.deepEqual(body, [nissan, subaru, mistubishi]);
+            });
+    });
+
+    it('Delete a car by id', () => {
+        return chai.request(app)
+            .del(`/cars/${subaru.id}`)
+            .then(()  => {
+                return chai.request(app)
+                    .get(`/cars/${subaru.id}`);
+            })
+            .then(res => {
+                assert.equal(res.status, 404);
             });
     });
 }); 
