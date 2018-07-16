@@ -12,13 +12,11 @@ describe('guitars API', () => {
 
     beforeEach(() => client.query('DELETE FROM guitars'));
 
-
     let Stratocaster = {
         model: 'Stratocaster',
-        manufacturer: 'Fender',
-     
+        manufacturer: 'Fender' 
     };
-    
+    //Saves a guitar
     function save(guitar) {
         return chai.request(app)
             .post('/guitars')
@@ -36,15 +34,23 @@ describe('guitars API', () => {
     it('saves a guitar', () => {
         assert.ok(Stratocaster.id);
     });
-     
+    //Updates a guitar 
     it('updates a guitar', () => {
         Stratocaster.manufacturer = 'Squire';
         return chai.request(app)
             .put(`/guitars/${Stratocaster.id}`)
             .send(Stratocaster)
             .then(({ body }) => {
-                assert.equal(body.manufacturer, Stratocaster.manufacturer);
+                assert.deepEqual(body.manufacturer, Stratocaster.manufacturer);
           
+            });
+    });
+    //Gets sll guitars
+    it('gets all guitars', () => {
+        return chai.request(app)
+            .get('/guitars')
+            .then(({ body }) => {
+                assert.deepEqual(body, [Stratocaster]);
             });
     });
 });
