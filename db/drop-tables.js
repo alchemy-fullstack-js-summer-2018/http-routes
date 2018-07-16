@@ -1,5 +1,4 @@
 /* eslint no-console: off, quotes: off */
-
 const client = require('../lib/db-client');
 
 client.query(`
@@ -10,6 +9,5 @@ client.query(`
         () => console.log('drop successful'),
         err => console.error(err)
     )
-    .then(() => {
-        client.end();
-    });
+    .then(() => client.end());
+    

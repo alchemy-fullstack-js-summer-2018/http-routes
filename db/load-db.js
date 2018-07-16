@@ -1,8 +1,6 @@
 /* eslint no-console: off, quotes: off */
-
 const client = require('../lib/db-client');
-
-const guitars = ['Fender', 'Gibson'];
+const guitars = ['Fender', 'Gibson', 'Squire'];
 
 const categoryPromises = guitars.map(guitar => {
     return client.query(
@@ -26,3 +24,4 @@ Promise.all(categoryPromises)
     .then(() => {
         client.end();
     });
+    
