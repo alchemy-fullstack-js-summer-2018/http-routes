@@ -67,5 +67,14 @@ describe('Cars API', () => {
             .then(({ body })  => {
                 assert.deepEqual(body, nissan);
             });
-    }); 
+    });
+    
+    it('Get cars', () => {
+        return chai.request(app)
+            .get('/cars')
+            .then(({ body }) => {
+                console.log(body);
+                assert.deepEqual(body, [nissan, subaru, mistubishi]);
+            });
+    });
 }); 
