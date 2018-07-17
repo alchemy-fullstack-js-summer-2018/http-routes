@@ -16,11 +16,11 @@ describe('Archer API', () => {
         quote: 'Phrasing.'
     };
 
-    // let lana = {
-    //     name: 'Lana Kane',
-    //     sex: 'male',
-    //     quote: 'Yup.'
-    // };
+    let lana = {
+        name: 'Lana Kane',
+        sex: 'female',
+        quote: 'Yup.'
+    };
 
     function save(character) {
         return chai.request(app)
@@ -36,8 +36,28 @@ describe('Archer API', () => {
         return save(archer);
     });
 
+    beforeEach(() => {
+        return save(lana);
+    });
+
     it('saves a character', () => {
         assert.ok(archer.id);
+    });
+
+    it('gets a character', () => {
+        return chai.request(app)
+            .get(`/archer/${archer.id}`)
+            .then(({ body }) => {
+                assert.deepEqual(archer, body);
+            });
+    });
+
+    it('gets all the characters from Archer', () => {
+        return chai.request(app)
+            .get('/archer')
+            .then(({ body }) => {
+                assert.deepEqual(body, [archer, lana]);
+            });
     });
 
     it('returns 404 on not found', () => {
@@ -47,6 +67,16 @@ describe('Archer API', () => {
                 assert.equal(res.status, 404);
             });
     });
+
+    it('updates a character', () => {
+        lana.quote = 'With your looks, maybe ‘bitchy’ isn’t the way to go.';
+        return chai.request(app)
+            .put(`/archer/${lana.id}`)
+            .send(lana)
+            .then(({ body }) => {
+                assert.equal(body.quote, lana.quote);
+            });
+    });
 });
     
-after(() => client.end());
+after(() => client.end()); 
