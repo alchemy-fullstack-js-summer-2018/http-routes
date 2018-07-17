@@ -51,6 +51,23 @@ describe('Albums API', () => {
         assert.ok(so.id);
     });
 
+    it('GETS an album by id', () => {
+        return chai.request(app)
+            .get(`/albums/${so.id}`)
+            .then(({ body }) => {
+                assert.deepEqual(body, so);
+            });
+    });
+
+    it('GETs all albums', () => {
+        return chai.request(app)
+            .get('/albums')
+            .then(({ body }) => {
+                assert.deepEqual(body, [so, synchronicity, disintegration]);
+            });
+    });
+
+    
     it('updates an album', () => {
         so.title = 'So: Extended Edition';
         return chai.request(app)
@@ -61,35 +78,7 @@ describe('Albums API', () => {
             });
     });
 
-    it('updates only album being updated', () => {
-        so.title = 'So';
-        return chai.request(app)
-            .put(`/albums/${so.id}`)
-            .send(so)
-            .then(() => chai.request(app).get('/albums'))
-            .then(({ body }) => {
-                body.sort((a, b) => a.id - b.id);
-                assert.deepEqual(body, [so, synchronicity]);
-            });
-    });
-
-    it('GET album by id', () => {
-        return chai.request(app)
-            .get(`/albums/${so.id}`)
-            .then(({ body }) => {
-                assert.deepEqual(body, so);
-            });
-    });
-
-    it('GET albums', () => {
-        return chai.request(app)
-            .get('/albums')
-            .then(({ body }) => {
-                assert.deepEqual(body, [so, synchronicity, disintegration]);
-            });
-    });
-
-    it('DELETE album', () => {
+    it('DELETES an album', () => {
         return chai.request(app)
             .del(`/albums/${so.id}`)
             .then(() => {
@@ -100,4 +89,5 @@ describe('Albums API', () => {
                 assert.equal(res.status, 404);
             });
     });
+
 });
