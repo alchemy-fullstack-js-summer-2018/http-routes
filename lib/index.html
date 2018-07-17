@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>List of Albums that I may be listening to</title>
+</head>
+<body>
+    <h1>List of albums that I may be listening to at any given time.
+    </h1>
+    <ul id="albums"></ul>
+    <script>
+    fetch('/albums')
+        .then(reponse => response.json())
+        .then(albums => {
+            const ul = document.getElementById('albums');
+            albums.forEach(album => {
+                const li = document.createElement('li');
+                li.innerText = `${album.name} by ${album.artist}`;
+                ul.appendChild(li);
+
+            });
+        });
+    </script>  
+</body>
+</html>
