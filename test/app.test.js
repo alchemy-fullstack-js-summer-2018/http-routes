@@ -60,14 +60,6 @@ describe('Archer API', () => {
             });
     });
 
-    it('returns 404 on not found', () => {
-        return chai.request(app)
-            .get('/sad-path')
-            .then(res => {
-                assert.equal(res.status, 404);
-            });
-    });
-
     it('updates a character', () => {
         lana.quote = 'With your looks, maybe ‘bitchy’ isn’t the way to go.';
         return chai.request(app)
@@ -77,6 +69,27 @@ describe('Archer API', () => {
                 assert.equal(body.quote, lana.quote);
             });
     });
+
+    it('deletes a character', () => {
+        return chai.request(app)
+            .del(`/archer/${archer.id}`)
+            .then(() => {
+                return chai.request(app)
+                    .get(`/archer/${archer.id}`);
+            })
+            .then(res => {
+                assert.equal(res.status, 404);
+            });
+    });
+
+    it('returns 404 on not found', () => {
+        return chai.request(app)
+            .get('/sad-path')
+            .then(res => {
+                assert.equal(res.status, 404);
+            });
+    });
+
 });
     
 after(() => client.end()); 
