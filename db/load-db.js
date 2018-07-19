@@ -1,4 +1,3 @@
-
 /* eslint no-console: off, quotes: off */
 
 const client = require('../lib/db-client');
@@ -15,7 +14,10 @@ const shows = [{
 
 const showPromises = shows.map(show => {
     return client.query(
-        `INSERT INTO shows(name) 
+        `INSERT INTO shows(
+            name,
+        description
+        ) 
         VALUES($1, $2)
         ON CONFLICT DO NOTHING;`,
         [show.name, show.description]

@@ -1,5 +1,5 @@
-const { join } = require('path');
-require('dotenv').config({ path: join(__dirname, '.env') });
+//const { join } = require('path');
+//require('dotenv').config({ path: join(__dirname, '.env') });
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const { assert } = chai;
@@ -11,16 +11,6 @@ describe('shows API', () => {
 
     beforeEach(() => client.query('DELETE FROM shows'));
 
-    let alone = {
-        name: 'Alone',
-        description: 'Weirdos surviving for months alone in nature with an ax and a tarp.'
-    };
-
-    let bachelorette = {
-        name: 'Bachelorette',
-        description: '11 man-babies, 8 dummies, 7 bores, and 2 almost-decent humans compete to marry a woman they barely know.'
-    };
-
     function save(show) {
         return chai.request(app)
             .post('/shows')
@@ -31,9 +21,20 @@ describe('shows API', () => {
             });
     }
 
+    let alone = {
+        name: 'Alone',
+        description: 'Weirdos surviving for months alone in nature with an ax and a tarp.'
+    };
+
+    let bachelorette = {
+        name: 'Bachelorette',
+        description: '11 man-babies, 8 dummies, 7 bores, and 2 almost-decent humans compete to marry a woman they barely know.'
+    };
+
     beforeEach(() => {
         return save(alone);
     });
+    
     beforeEach(() => {
         return save(bachelorette);
     });
@@ -42,13 +43,44 @@ describe('shows API', () => {
         assert.ok(alone.id);
     });
 
+    it('DELETE show', () => {
+        return chai.request(app)
+            .del(`/shows/${alone.id}`)
+            .then(res => {
+                assert.deepEqual(res.body, { removed: true });
+            })
+            .then(() => {
+                return chai.request(app)
+                    .get(`/shows/${alone.id}`);
+            })
+            .then(res => {
+                assert.equal(res.status, 404);
+            });
+    });
+
     it('updates a show', () => {
         alone.description = 'Ten weirdos surviving for months alone in nature with an ax and a tarp.';
         return chai.request(app)
-            .put(`/shows/${alone.id}`)
+            .put('/shows')
             .send(alone)
             .then(({ body }) => {
                 assert.equal(body.description, 'Ten weirdos surviving for months alone in nature with an ax and a tarp.');
+            });
+    });
+
+    it('GET shows', () => {
+        return chai.request(app)
+            .get('/shows')
+            .then(({ body }) => {
+                assert.deepEqual(body, [alone, bachelorette]);
+            });
+    });
+
+    it('GET show Alone by id', () => {
+        return chai.request(app)
+            .get(`/shows/${alone.id}`)
+            .then(({ body }) => {
+                assert.deepEqual(body, alone);
             });
     });
 
@@ -57,39 +89,17 @@ describe('shows API', () => {
         return chai.request(app)
             .put(`/shows/${alone.id}`)
             .send(alone)
-            .then(() => chai.request(app).get('/pets'))
+            .then(() => chai.request(app).get('/shows'))
             .then(({ body }) => {
                 body.sort((a, b) => a.id - b.id);
                 assert.deepEqual(body, [alone, bachelorette]);
             });
     });
 
-    it('GET show by id', () => {
-        return chai.request(app)
-            .get(`/pets/${alone.id}`)
-            .then(({ body }) => {
-                assert.deepEqual(body, alone);
-            });
-    });
 
-    it('GET shows', () => {
-        return chai.request(app)
-            .get('/pets')
-            .then(({ body }) => {
-                assert.deepEqual(body, [alone, bachelorette]);
-            });
-    });
 
-    it('DELETE show', () => {
-        return chai.request(app)
-            .del(`/pets/${alone.id}`)
-            .then(() => {
-                return chai.request(app)
-                    .get(`/pets/${alone.id}`);
-            })
-            .then(res => {
-                assert.equal(res.status, 404);
-            });
-    });
+
+
+
 
 });

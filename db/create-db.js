@@ -6,7 +6,7 @@ client.query(`
     CREATE TABLE IF NOT EXISTS shows(
         id SERIAL PRIMARY KEY,
         name VARCHAR(256) UNIQUE NOT NULL,
-        description VARCHAR
+        description VARCHAR(256)
     );
 `)
     .then(

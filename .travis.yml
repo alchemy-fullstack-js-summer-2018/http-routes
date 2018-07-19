@@ -1,7 +1,8 @@
 language: node_js
 node_js:
   - "10"
-services: 
+services:
   - postgresql
-script:
+before_script:
+  - psql -c 'create database shows;' -U postgres
   - npm run db:all

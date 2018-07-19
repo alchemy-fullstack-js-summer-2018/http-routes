@@ -1,7 +1,7 @@
 {
   "name": "http-routes",
   "version": "1.0.0",
-  "description": "",
+  "description": "Sarah Rehmer",
   "main": "index.js",
   "scripts": {
     "lint": "eslint .",
@@ -36,5 +36,9 @@
   "dependencies": {
     "dotenv": "^6.0.0",
     "pg": "^7.4.3"
+  },
+  "directories": {
+    "lib": "lib",
+    "test": "test"
   }
 }
