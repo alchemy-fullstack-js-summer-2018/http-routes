@@ -2,7 +2,6 @@
 
 const client = require('../lib/db-client');
 
-//const shows = ['alone', 'bachelorette'];
 const shows = [{
     name: 'Alone',
     description: 'Weirdos surviving for months alone in nature with an ax and a tarp.'
